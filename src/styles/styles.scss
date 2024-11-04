@@ -1,0 +1,15 @@
+@use "colors";
+html, body{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--bg-primary);
+}
+.container{
+  background-color: var(--bg-container);
+  padding: 16px;
+  margin: 100px;
+  border-radius: 8px;
+}
