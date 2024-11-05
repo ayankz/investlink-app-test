@@ -1,4 +1,6 @@
 <div class="container">
   <app-navbar></app-navbar>
-  <!--  <app-create-task></app-create-task>-->
+  @if (isVisibleCreatePage | async) {
+    <app-create-task></app-create-task>
+  }
 </div>

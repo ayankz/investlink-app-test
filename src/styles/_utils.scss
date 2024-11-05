@@ -15,13 +15,17 @@
   gap: 30px;
 }
 .wrapper{
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--bg-wrapper);
-  opacity: 0.8;
+    opacity: 1;
+  @media screen and (min-width: 768px){
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-wrapper);
+    opacity: 0.8;
+
+  }
 }
 .absolute-top-right{
   position: absolute;
