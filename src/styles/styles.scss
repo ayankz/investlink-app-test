@@ -39,6 +39,58 @@ input,textarea{
   border-radius: 5px;
   margin-top: 3px;
 }
+
+.checkbox-name{
+  color:var(--text-navbar);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 23px;
+}
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+
+  input {
+    display: none;
+  }
+
+  .checkmark {
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+    background-color: transparent;
+    border: 1.5px solid #404656;
+    position: relative;
+    margin-right: 8px;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+
+  input:checked + .checkmark {
+    background-color: #6200ea;
+    border-color: #6200ea;
+    color: white;
+  }
+
+
+  .checkmark::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    display: none;
+    width: 8px;
+    height: 4px;
+    border-left: 2px solid white;
+    border-bottom: 2px solid white;
+    top: 3px;
+    transform: rotate(-45deg);
+  }
+  input:checked + .checkmark::after {
+    display: block;
+  }
+}
+
 .container{
   display: block;
   height: auto;
