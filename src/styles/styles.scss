@@ -1,15 +1,79 @@
 @use "colors";
-html, body{
-  height: 100%;
-  width: 100%;
+@use "utils";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+*{
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  padding: 0;
   margin: 0;
+
+}
+html, body{
+  width: 100%;
+  height: 100%;
+  display: block;
+  margin: 0;
+  font-size: 10px;
   padding: 0;
   box-sizing: border-box;
   background-color: var(--bg-primary);
+  @media screen and (min-width: 768px) {
+    font-size: 14px;
+  }
+}
+li{
+  list-style: none;
+}
+h1{
+  font-size: 16px;
+  @media screen and (min-width: 768px) {
+    font-size: 19px;
+  }
+}
+input,textarea{
+  outline: none;
+  padding: 0;
+  background-color: transparent;
+  border: 1px solid var(--border-input);
+  border-radius: 5px;
+  margin-top: 3px;
 }
 .container{
+  display: block;
+  height: auto;
   background-color: var(--bg-container);
-  padding: 16px;
-  margin: 100px;
+  margin: 16px;
   border-radius: 8px;
+  border:1px solid #31394C;
+  @media screen and (min-width: 768px) {
+    margin: 50px;
+    height: auto;
+  }
+  overflow: visible;
+}
+.button{
+  @media screen and (min-width: 768px) {
+    padding: 10px 23px;
+    font-size: 16px;
+  }
+  font-size: 12px;
+  padding: 8px;
+  border: 1px solid var(--text-violet);
+  background-color: transparent;
+  color: var(--text-white);
+  border-radius: 5px;
+  cursor: pointer;
+  &__primary{
+    background-color: var(--text-violet);
+  }
+  &__flat{
+    background-color: transparent;
+    color: var(--text-violet);
+  }
+  &__red{
+    background-color: transparent;
+    border-color:var(--text-red);
+    color:var(--text-red);
+  }
 }
