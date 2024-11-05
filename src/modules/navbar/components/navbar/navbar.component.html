@@ -1,0 +1,20 @@
+<app-button class="btn" (buttonClick)="onCreate()"></app-button>
+<ul class="list">
+  @for (item of items; track item) {
+    <li (click)="onItemClick(item.status)" class="list-item">
+      <img [src]="'assets/svg/' + item.icon + '.svg'" [alt]="item.label" />
+      <span>{{ item.label }}</span>
+    </li>
+  }
+</ul>
+<div class="tag">
+  <span class="tag-title">Теги</span>
+  <ul class="list">
+    @for (tag of tags; track tag) {
+      <li class="list-item">
+        <div class="circle" [ngClass]="tag.className"></div>
+        <span>{{ tag.label }}</span>
+      </li>
+    }
+  </ul>
+</div>

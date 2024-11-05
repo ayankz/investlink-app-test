@@ -1,0 +1,65 @@
+<div class="wrapper"></div>
+<div class="absolute-top-right h-100 create-container">
+  <div class="create-container-header flex space-between">
+    <span>Задача</span>
+    <div class="flex align-center gap-10">
+      <img src="assets/svg/star-small.svg" alt="star-small" />
+      <img (click)="onClose()" src="assets/svg/close.svg" alt="close" />
+    </div>
+  </div>
+  <form class="flex-col">
+    <div class="form-control flex-col">
+      <label>Название</label>
+      <input type="text" placeholder="Названия задачи" />
+    </div>
+    <div class="form-control flex-col">
+      <label>Дата завершения задачи</label>
+      <input type="date" placeholder="Дата и время" />
+    </div>
+    <div class="form-control">
+      <label class="custom-checkbox">
+        <input type="checkbox" />
+        <span class="checkmark"></span>
+        <span class="checkbox-name">Важная задача</span>
+      </label>
+    </div>
+
+    <div class="form-control flex-col">
+      <label>Дата и время окончания</label>
+      <input type="date" placeholder="Дата и время" />
+    </div>
+    <div class="form-control flex-col">
+      <label>Описание задачи</label>
+      <textarea rows="5" cols="10" placeholder="Описание задачи"></textarea>
+    </div>
+    <div class="form-control flex-col">
+      <label class="mb-15">Теги</label>
+      <div class="flex wrap gap-16">
+        <label class="custom-checkbox">
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+          <span class="checkbox-name">Важная задача</span>
+        </label>
+        <label class="custom-checkbox">
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+          <span class="checkbox-name">Важная задача</span>
+        </label>
+        <label class="custom-checkbox">
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+          <span class="checkbox-name">Важная задача</span>
+        </label>
+        <label class="custom-checkbox">
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+          <span class="checkbox-name">Важная задача</span>
+        </label>
+      </div>
+    </div>
+    <div class="flex gap-16">
+      <app-button title="Добавить"></app-button>
+      <app-button className="button_flat" title="Удалить"></app-button>
+    </div>
+  </form>
+</div>
