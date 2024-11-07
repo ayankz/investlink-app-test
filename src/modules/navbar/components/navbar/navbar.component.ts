@@ -33,11 +33,11 @@ export class NavbarComponent {
       className: 'circle__red',
     },
   ];
-  constructor(private storeService: StoreService) {}
+  constructor(private _store: StoreService) {}
   onItemClick(status: string) {
-    this.storeService.setNewStatus(status);
+    this._store.changeStatus(status);
   }
   onCreate() {
-    this.storeService.setIsVisibleCreateComponent(true);
+    this._store.setIsVisibleCreateComponent(true);
   }
 }

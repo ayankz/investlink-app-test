@@ -18,6 +18,8 @@ export class CreateTaskComponent {
   public taskForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
     isUrgentTask: new FormControl(false, [Validators.required]),
+    isFinishedTask: new FormControl(false),
+    isRemovedTask: new FormControl(false),
     description: new FormControl('', [Validators.required]),
     deadline: new FormControl('15:23 / 04.09.2022 ', [Validators.required]),
     tags: new FormArray([], [Validators.required]),

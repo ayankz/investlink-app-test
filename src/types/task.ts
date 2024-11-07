@@ -3,5 +3,7 @@ export interface Task {
   description: string;
   deadline: string;
   isUrgentTask: boolean;
+  isFinishedTask: boolean;
+  isRemovedTask: boolean;
   tags: string[];
 }

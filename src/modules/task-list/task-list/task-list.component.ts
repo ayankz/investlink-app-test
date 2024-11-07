@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { StoreService } from '../../../services/store.service';
-import { Observable, of, switchMap } from 'rxjs';
+import { combineLatest, map, Observable, of, switchMap } from 'rxjs';
 import { TaskEnum } from '../../../enums/taskEnum';
 import { Task } from '../../../types/task';
 @Component({
@@ -12,10 +12,10 @@ export class TaskListComponent {
   public isReadyToRemove = false;
   public taskToRemove!: Task;
   public tasks$: Observable<Task[]>;
-  public currentTaskName: Observable<string> | null = null;
+  public currentTaskName$: Observable<string> | null = null;
   constructor(private _store: StoreService) {
-    this.currentTaskName = this._store.taskStatus;
-    this.currentTaskName = this._store.taskStatus.pipe(
+    this.currentTaskName$ = this._store.taskStatus;
+    this.currentTaskName$ = this._store.taskStatus.pipe(
       switchMap((status) => {
         if (status === TaskEnum.PROGRESS) {
           return of(TaskEnum.PROGRESS_TEXT);
@@ -28,7 +28,23 @@ export class TaskListComponent {
         }
       }),
     );
-    this.tasks$ = this._store.getTaskList();
+    this.tasks$ = this._store.taskStatus$.pipe(
+      switchMap((status) => {
+        return this._store.getTaskList().pipe(
+          map((tasks) => {
+            if (status === TaskEnum.URGENT) {
+              return tasks.filter((task) => task.isUrgentTask);
+            } else if (status === TaskEnum.FINISHED) {
+              return tasks.filter((task) => task.isFinishedTask);
+            } else if (status === TaskEnum.REMOVED) {
+              return tasks.filter((task) => task.isRemovedTask);
+            } else {
+              return tasks;
+            }
+          }),
+        );
+      }),
+    );
   }
   getClassByTagName(tag: string) {
     switch (tag) {
@@ -49,7 +65,6 @@ export class TaskListComponent {
   deleteTask() {
     this.isReadyToRemove = !this.isReadyToRemove;
     this._store.deleteTask(this.taskToRemove);
-    this.tasks$ = this._store.getTaskList();
   }
   closeModal() {
     this.isReadyToRemove = !this.isReadyToRemove;
