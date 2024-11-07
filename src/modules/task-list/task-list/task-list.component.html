@@ -1,0 +1,27 @@
+<div>
+  <div class="element"><app-search-task></app-search-task></div>
+  <div class="element title">{{ currentTaskName | async }}</div>
+  <table>
+    @for (task of tasks$ | async; track task) {
+      <tr>
+        <td>
+          <label class="custom-checkbox">
+            <input type="checkbox" value="true" />
+            <span class="checkmark"></span>
+          </label>
+        </td>
+        <td [ngClass]="task.isUrgentTask ? 'highlight' : ''">
+          {{ task.name }}
+        </td>
+        <td class="flex gap-10 wrap">
+          @for (tag of task.tags; track tag) {
+            <span [ngClass]="getClassByTagName(tag)"> {{ tag }}</span>
+          }
+        </td>
+        <td>{{ task.deadline }}</td>
+        <td><img src="assets/svg/basket.svg" alt="delete" /></td>
+        <td><img src="assets/svg/dots.svg" alt="dots" /></td>
+      </tr>
+    }
+  </table>
+</div>

@@ -1,3 +1,8 @@
-<button class="button" [ngClass]="className" (click)="emitter()">
+<button
+  [ngClass]="className"
+  class="button"
+  (click)="emitter()"
+  [disabled]="isDisable"
+>
   {{ title }}
 </button>

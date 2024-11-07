@@ -1,0 +1,11 @@
+<div class="search-container">
+  <div class="flex gap-10">
+    <img src="assets/svg/search.svg" alt="search" />
+    <input
+      [(ngModel)]="searchQuery"
+      (ngModelChange)="findByQuery()"
+      type="text"
+      placeholder="Поиск"
+    />
+  </div>
+</div>
