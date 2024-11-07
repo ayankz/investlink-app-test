@@ -32,6 +32,11 @@ h1{
     font-size: 19px;
   }
 }
+h2{
+  color:var(--text-navbar);
+  font-size: 21px;
+  line-height: 25px;
+}
 input,textarea{
   outline: none;
   padding: 0;

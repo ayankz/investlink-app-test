@@ -9,6 +9,8 @@ import { Task } from '../../../types/task';
   styleUrl: './task-list.component.scss',
 })
 export class TaskListComponent {
+  public isReadyToRemove = false;
+  public taskToRemove!: Task;
   public tasks$: Observable<Task[]>;
   public currentTaskName: Observable<string> | null = null;
   constructor(private _store: StoreService) {
@@ -27,7 +29,6 @@ export class TaskListComponent {
       }),
     );
     this.tasks$ = this._store.getTaskList();
-    this.tasks$.subscribe(console.log);
   }
   getClassByTagName(tag: string) {
     switch (tag) {
@@ -40,5 +41,17 @@ export class TaskListComponent {
       default:
         return 'tag-name tag-name__red';
     }
+  }
+  removeTask(task: Task) {
+    this.taskToRemove = task;
+    this.isReadyToRemove = !this.isReadyToRemove;
+  }
+  deleteTask() {
+    this.isReadyToRemove = !this.isReadyToRemove;
+    this._store.deleteTask(this.taskToRemove);
+    this.tasks$ = this._store.getTaskList();
+  }
+  closeModal() {
+    this.isReadyToRemove = !this.isReadyToRemove;
   }
 }

@@ -1,0 +1,21 @@
+<div class="wrapper"></div>
+<div class="absolute-center modal">
+  <div class="flex-col gap-16 align-center">
+    <img src="assets/svg/warning.svg" alt="warning" />
+    <div class="flex-col align-center gap-8">
+      <h2>Вы уверены?</h2>
+      <span>Вы не сможете восстановить это</span>
+    </div>
+    <div class="flex gap-10 mt-10">
+      <app-button
+        title="Да, удалить"
+        (buttonClick)="onRemoveTask()"
+      ></app-button>
+      <app-button
+        (buttonClick)="closeModal()"
+        title="Отмена"
+        className="button__red"
+      ></app-button>
+    </div>
+  </div>
+</div>

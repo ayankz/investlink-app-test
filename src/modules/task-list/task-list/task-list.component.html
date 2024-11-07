@@ -19,9 +19,22 @@
           }
         </td>
         <td>{{ task.deadline }}</td>
-        <td><img src="assets/svg/basket.svg" alt="delete" /></td>
+        <td>
+          <img
+            (click)="removeTask(task)"
+            src="assets/svg/basket.svg"
+            alt="delete"
+          />
+        </td>
         <td><img src="assets/svg/dots.svg" alt="dots" /></td>
       </tr>
     }
   </table>
 </div>
+@if (isReadyToRemove) {
+  <app-remove-task
+    [innerTask]="taskToRemove"
+    (removeTask)="deleteTask()"
+    (close)="closeModal()"
+  ></app-remove-task>
+}
