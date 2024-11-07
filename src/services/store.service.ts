@@ -33,6 +33,7 @@ export class StoreService {
     const actualTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
     actualTasks.push(task);
     localStorage.setItem('tasks', JSON.stringify(actualTasks));
+    this.getTaskList();
   }
   deleteTask(task: Task) {
     try {
@@ -49,6 +50,7 @@ export class StoreService {
         return item;
       });
       localStorage.setItem('tasks', JSON.stringify(mappedList));
+      this.getTaskList();
     } catch (error) {
       console.error('Ошибка при удалении задачи:', error);
     }

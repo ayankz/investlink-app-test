@@ -39,7 +39,7 @@ export class TaskListComponent {
             } else if (status === TaskEnum.REMOVED) {
               return tasks.filter((task) => task.isRemovedTask);
             } else {
-              return tasks;
+              return tasks.filter((task) => !task.isRemovedTask);
             }
           }),
         );
