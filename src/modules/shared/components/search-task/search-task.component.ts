@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-search-task',
@@ -7,7 +7,8 @@ import { Component } from '@angular/core';
 })
 export class SearchTaskComponent {
   searchQuery = '';
+  @Output() inputChanges = new EventEmitter();
   findByQuery() {
-    console.log(this.searchQuery);
+    this.inputChanges.emit(this.searchQuery);
   }
 }

@@ -1,5 +1,7 @@
 <div>
-  <div class="element"><app-search-task></app-search-task></div>
+  <div class="element">
+    <app-search-task (inputChanges)="searchByQuery($event)"></app-search-task>
+  </div>
   <div class="element title">{{ currentTaskName$ | async }}</div>
   <table>
     @for (task of tasks$ | async; track task.name) {
@@ -18,7 +20,7 @@
           </td>
         }
         <td [ngClass]="task.isUrgentTask ? 'highlight' : ''">
-          {{ task.name }}
+          <span [innerHTML]="highlightText(task.name)"></span>
         </td>
         <td class="flex gap-10 wrap">
           @for (tag of task.tags; track tag) {

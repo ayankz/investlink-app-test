@@ -3,6 +3,7 @@ import { StoreService } from '../../../services/store.service';
 import { combineLatest, map, Observable, of, switchMap } from 'rxjs';
 import { TaskEnum } from '../../../enums/taskEnum';
 import { Task } from '../../../types/task';
+import { TagService } from '../../../services/tag.service';
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
@@ -11,9 +12,13 @@ import { Task } from '../../../types/task';
 export class TaskListComponent {
   public isReadyToRemove = false;
   public taskToRemove!: Task;
+  searchQuery: string = '';
   public tasks$: Observable<Task[]>;
   public currentTaskName$: Observable<string> | null = null;
-  constructor(private _store: StoreService) {
+  constructor(
+    private _store: StoreService,
+    private tagService: TagService,
+  ) {
     this.currentTaskName$ = this._store.taskStatus;
     this.currentTaskName$ = this._store.taskStatus.pipe(
       switchMap((status) => {
@@ -30,21 +35,43 @@ export class TaskListComponent {
         }
       }),
     );
-    this.tasks$ = this._store.taskStatus$.pipe(
-      switchMap((status) => {
-        return this._store.getTaskList().pipe(
+    this.tasks$ = combineLatest([
+      this._store.taskStatus$,
+      this.tagService.activeTags$, // Assuming tagStatus$ is in navbarService
+    ]).pipe(
+      switchMap(([status, tagStatus]) => {
+        return this._store.getTaskList$().pipe(
           map((tasks) => {
+            let filteredTasks = tasks;
+
+            // Filter by task status
             if (status === TaskEnum.URGENT) {
-              return tasks.filter((task) => task.isUrgentTask);
+              filteredTasks = filteredTasks.filter(
+                (task) => task.isUrgentTask && !task.isFinishedTask,
+              );
             } else if (status === TaskEnum.FINISHED) {
-              return tasks.filter((task) => task.isFinishedTask);
+              filteredTasks = filteredTasks.filter(
+                (task) => task.isFinishedTask,
+              );
             } else if (status === TaskEnum.REMOVED) {
-              return tasks.filter((task) => task.isRemovedTask);
+              filteredTasks = filteredTasks.filter(
+                (task) => task.isRemovedTask,
+              );
             } else {
-              return tasks.filter(
+              filteredTasks = filteredTasks.filter(
                 (task) => !task.isRemovedTask && !task.isFinishedTask,
               );
             }
+
+            // Additional filter by tag status
+            if (tagStatus && tagStatus.length > 0) {
+              filteredTasks = filteredTasks.filter(
+                (task) =>
+                  task.tags && task.tags.some((tag) => tagStatus.includes(tag)),
+              );
+            }
+
+            return filteredTasks;
           }),
         );
       }),
@@ -73,7 +100,16 @@ export class TaskListComponent {
   finishTask(event: Event, task: Task) {
     const isChecked = (event.target as HTMLInputElement).checked;
     this._store.toggleToFinishAction(task, isChecked);
-    // this._store.markTaskAsFinished(task);
+  }
+  searchByQuery(query: string) {
+    this.searchQuery = query;
+  }
+  highlightText(taskName: string): string {
+    if (!this.searchQuery) {
+      return taskName;
+    }
+    const regex = new RegExp(`(${this.searchQuery})`, 'gi');
+    return taskName.replace(regex, '<span class="bold">$1</span>');
   }
   closeModal() {
     this.isReadyToRemove = !this.isReadyToRemove;

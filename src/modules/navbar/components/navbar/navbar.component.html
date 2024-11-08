@@ -6,11 +6,7 @@
       class="list-item"
       [ngClass]="item === activeItem ? ' list-item__active' : ''"
     >
-      <img
-        [src]="'assets/svg/' + item.icon + '.svg'"
-        [alt]="item.label"
-        fill="red"
-      />
+      <img [src]="'assets/svg/' + item.icon + '.svg'" [alt]="item.label" />
       <span>{{ item.label }}</span>
     </li>
   }
@@ -18,8 +14,14 @@
 <div class="tag">
   <span class="tag-title">Теги</span>
   <ul class="list">
-    @for (tag of tags; track tag) {
-      <li class="list-item">
+    @for (tag of tags$ | async; track tag) {
+      <li
+        (click)="filterByTag(tag.label)"
+        [ngClass]="{
+          'list-item': true,
+          'list-item__active-tag': (activeTags$ | async)?.includes(tag.label),
+        }"
+      >
         <div class="circle" [ngClass]="tag.className"></div>
         <span>{{ tag.label }}</span>
       </li>

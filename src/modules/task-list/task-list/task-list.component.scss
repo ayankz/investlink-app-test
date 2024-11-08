@@ -11,8 +11,11 @@
   }
 }
 .highlight{
+  @media screen and (min-width: 768px){
+    font-size: 14px;
+  }
   color: var(--text-yellow);
-  font-size: 14px;
+  font-size: 10px;
   line-height: 21px;
   font-weight: 600;
 }
@@ -22,13 +25,14 @@
   line-height: 21px;
 }
 table{
-  img {
-    cursor: pointer;
-  }
   width: 100%;
   color: var(--text-navbar);
+  padding: 0 10px;
   @media screen and (min-width: 768px){
     padding: 0 20px;
+  }
+  img {
+    cursor: pointer;
   }
   tr{
     display: flex;

@@ -23,7 +23,9 @@
       justify-content: center;
       gap: 2px;
       align-items: center;
-
+      &:hover{
+        color:var(--text-hover-tag);
+      }
       @media screen and (min-width: 768px) {
         display: flex;
         flex-direction: row;
@@ -34,6 +36,12 @@
             filter: invert(53%) sepia(93%) saturate(3429%) hue-rotate(241deg) brightness(96%) contrast(93%);
           }
         }
+        &__active-tag{
+          border-radius: 5px;
+          padding: 10px;
+          border: 1px solid var(--text-violet);
+        }
+
       }
     }
   }
