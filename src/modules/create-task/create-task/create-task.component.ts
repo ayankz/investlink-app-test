@@ -20,8 +20,8 @@ export class CreateTaskComponent {
     isUrgentTask: new FormControl(false, [Validators.required]),
     isFinishedTask: new FormControl(false),
     isRemovedTask: new FormControl(false),
-    description: new FormControl('', [Validators.required]),
-    deadline: new FormControl('15:23 / 04.09.2022 ', [Validators.required]),
+    description: new FormControl(''),
+    deadline: new FormControl('', [Validators.required]),
     tags: new FormArray([], [Validators.required]),
   });
   constructor(

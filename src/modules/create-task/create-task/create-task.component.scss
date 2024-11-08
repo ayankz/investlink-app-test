@@ -15,6 +15,8 @@
   form{
     padding: 20px;
     gap:10px;
+    border: 1px solid var(--text-white);
+    margin: 10px;
     @media screen and (min-width: 768px){
       max-width: 360px;
       height: 100%;

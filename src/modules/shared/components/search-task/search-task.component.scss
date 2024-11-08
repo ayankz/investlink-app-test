@@ -1,7 +1,10 @@
 .search-container{
+  margin-top: 20px;
+  @media screen and (min-width: 768px){
+    margin: 0;
+  }
   input{
     border: none;
     color:var(--text-navbar)
   }
-
 }

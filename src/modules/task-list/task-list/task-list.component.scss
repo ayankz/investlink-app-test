@@ -20,9 +20,29 @@
   font-weight: 600;
 }
 .title{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   color: var(--text-navbar);
   font-size: 19px;
   line-height: 21px;
+  .btn{
+    width: 30px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    justify-content: center;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--text-violet);
+    cursor: pointer;
+  }
+  @media screen and (min-width: 768px){
+    .btn{
+      display: none;
+    }
+  }
 }
 table{
   width: 100%;

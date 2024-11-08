@@ -2,7 +2,10 @@
   <div class="element">
     <app-search-task (inputChanges)="searchByQuery($event)"></app-search-task>
   </div>
-  <div class="element title">{{ currentTaskName$ | async }}</div>
+  <div class="element title">
+    <span>{{ currentTaskName$ | async }}</span>
+    <div class="btn" (click)="openCreatePage()">+</div>
+  </div>
   <table>
     @for (task of tasks$ | async; track task.name) {
       <tr>

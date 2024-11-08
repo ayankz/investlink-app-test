@@ -114,4 +114,7 @@ export class TaskListComponent {
   closeModal() {
     this.isReadyToRemove = !this.isReadyToRemove;
   }
+  openCreatePage() {
+    this._store.setIsVisibleCreateComponent(true);
+  }
 }
