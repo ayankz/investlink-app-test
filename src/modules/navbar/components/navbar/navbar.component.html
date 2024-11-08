@@ -1,8 +1,16 @@
 <app-button class="btn" (buttonClick)="onCreate()"></app-button>
 <ul class="list">
   @for (item of items; track item) {
-    <li (click)="onItemClick(item.status)" class="list-item">
-      <img [src]="'assets/svg/' + item.icon + '.svg'" [alt]="item.label" />
+    <li
+      (click)="onItemClick(item)"
+      class="list-item"
+      [ngClass]="item === activeItem ? ' list-item__active' : ''"
+    >
+      <img
+        [src]="'assets/svg/' + item.icon + '.svg'"
+        [alt]="item.label"
+        fill="red"
+      />
       <span>{{ item.label }}</span>
     </li>
   }

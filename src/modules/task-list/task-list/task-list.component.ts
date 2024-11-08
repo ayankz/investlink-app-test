@@ -23,8 +23,10 @@ export class TaskListComponent {
           return of(TaskEnum.URGENT_TEXT);
         } else if (status === TaskEnum.FINISHED) {
           return of(TaskEnum.FINISHED_TEXT);
-        } else {
+        } else if (status === TaskEnum.REMOVED) {
           return of(TaskEnum.REMOVED_TEXT);
+        } else {
+          return of(TaskEnum.PROGRESS_TEXT);
         }
       }),
     );
@@ -39,7 +41,9 @@ export class TaskListComponent {
             } else if (status === TaskEnum.REMOVED) {
               return tasks.filter((task) => task.isRemovedTask);
             } else {
-              return tasks.filter((task) => !task.isRemovedTask);
+              return tasks.filter(
+                (task) => !task.isRemovedTask && !task.isFinishedTask,
+              );
             }
           }),
         );
@@ -65,6 +69,11 @@ export class TaskListComponent {
   deleteTask() {
     this.isReadyToRemove = !this.isReadyToRemove;
     this._store.deleteTask(this.taskToRemove);
+  }
+  finishTask(event: Event, task: Task) {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    this._store.toggleToFinishAction(task, isChecked);
+    // this._store.markTaskAsFinished(task);
   }
   closeModal() {
     this.isReadyToRemove = !this.isReadyToRemove;

@@ -4,12 +4,19 @@
   <table>
     @for (task of tasks$ | async; track task.name) {
       <tr>
-        <td>
-          <label class="custom-checkbox">
-            <input type="checkbox" value="true" />
-            <span class="checkmark"></span>
-          </label>
-        </td>
+        @if (!task.isRemovedTask) {
+          <td>
+            <label class="custom-checkbox">
+              <input
+                (change)="finishTask($event, task)"
+                type="checkbox"
+                value="true"
+                [checked]="task.isFinishedTask"
+              />
+              <span class="checkmark"></span>
+            </label>
+          </td>
+        }
         <td [ngClass]="task.isUrgentTask ? 'highlight' : ''">
           {{ task.name }}
         </td>
@@ -19,13 +26,15 @@
           }
         </td>
         <td>{{ task.deadline }}</td>
-        <td>
-          <img
-            (click)="removeTask(task)"
-            src="assets/svg/basket.svg"
-            alt="delete"
-          />
-        </td>
+        @if (!task.isRemovedTask) {
+          <td>
+            <img
+              (click)="removeTask(task)"
+              src="assets/svg/basket.svg"
+              alt="delete"
+            />
+          </td>
+        }
         <td><img src="assets/svg/dots.svg" alt="dots" /></td>
       </tr>
     }

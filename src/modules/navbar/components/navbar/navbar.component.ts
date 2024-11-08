@@ -33,9 +33,11 @@ export class NavbarComponent {
       className: 'circle__red',
     },
   ];
+  public activeItem: any = this.items[0];
   constructor(private _store: StoreService) {}
-  onItemClick(status: string) {
-    this._store.changeStatus(status);
+  onItemClick(item: any) {
+    this.activeItem = item;
+    this._store.changeStatus(item.status);
   }
   onCreate() {
     this._store.setIsVisibleCreateComponent(true);

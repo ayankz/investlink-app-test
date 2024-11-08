@@ -23,10 +23,17 @@
       justify-content: center;
       gap: 2px;
       align-items: center;
+
       @media screen and (min-width: 768px) {
         display: flex;
         flex-direction: row;
         gap: 11px;
+        &__active{
+          color:var(--text-active);
+          img{
+            filter: invert(53%) sepia(93%) saturate(3429%) hue-rotate(241deg) brightness(96%) contrast(93%);
+          }
+        }
       }
     }
   }

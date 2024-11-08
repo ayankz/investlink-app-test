@@ -55,4 +55,19 @@ export class StoreService {
       console.error('Ошибка при удалении задачи:', error);
     }
   }
+  toggleToFinishAction(task: Task, isFinished: boolean) {
+    const actualTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+    const modifiedList = actualTasks.map((item: Task) => {
+      if (item.name === task.name) {
+        return {
+          ...item,
+          isFinishedTask: isFinished,
+          isUrgentTask: !isFinished,
+        };
+      }
+      return item;
+    });
+    localStorage.setItem('tasks', JSON.stringify(modifiedList));
+    this.getTaskList();
+  }
 }
